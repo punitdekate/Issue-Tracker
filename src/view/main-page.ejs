@@ -1,114 +1,64 @@
 <div class="main-page">
-    <div class="projects">
-        <p class="h5">
-            <i class="fa-solid fa-list"></i><span class="mx-3">Projects</span>
-        </p>
-        <ol class="list-group list-group-numbered">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold"><a>Project 1</a></div>
-                </div>
-                <span class="badge text-bg-primary rounded-pill">14</span>
-            </li>
-        </ol>
+    <div class="main-page-left">
+        <h2>Projects</h2>
+        <hr>
+        <div>
+            <ul>
+                <% projects.forEach(project=>{%>
+                    <li>
+                        <a href="/project/<%=project._id %>">
+                            <%= project.name %>
+                        </a>
+                    </li>
+                    <%})%>
+            </ul>
+
+        </div>
     </div>
-    <div class="project-details">
-        <p class="h5">
-            <i class="fa-solid fa-bug"></i><span class="mx-2">All Issues</span>
-        </p>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown mx-2">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Projects
-                  </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="form-check mx-1">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label class="form-check-label" for="flexCheckDefault">
-                          Project 1
-                        </label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown mx-2">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Types
-                  </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="form-check mx-1">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label class="form-check-label" for="flexCheckDefault">
-                          Project 1
-                        </label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown mx-2">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Status
-                  </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="form-check mx-1">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label class="form-check-label" for="flexCheckDefault">
-                          Project 1
-                        </label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-outline-success" type="submit">
-                  Search
-                </button>
+    <div class="main-page-right">
+        <nav>
+            <ul>
+                <li>
+                    <select name='project' id="project" placeholder="Select Project">
+                      <option value="" disabled selected>Select Project</option>
+                      <option value="Project 1">Project 1</option>
+                  </select>
+                </li>
+                <li>
+                    <form>
+                        <input type="search" name="search" placeholder="Search...">
+                        <button type="submit">Search</button>
                     </form>
-                </div>
-            </div>
+                </li>
+            </ul>
         </nav>
-        <!-- Add more rows for bugs as needed -->
-        <table class="table">
-            <thead class="table-primary table-bordered border-primary">
-                <tr>
-                    <th scope="col" class="text-primary">Type</th>
-                    <th scope="col" class="text-primary">Id</th>
-                    <th scope="col" class="text-primary">Title</th>
-                    <th scope="col" class="text-primary">Status</th>
-                    <th scope="col" class="text-primary">Priority</th>
-                    <th scope="col" class="text-primary">Assigned to</th>
-                    <th scope="col" class="text-primary">Reported on</th>
-                    <th scope="col" class="text-primary">Reported by</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">Bug</th>
-                    <th scope="row">
-                        <a href="" class="text-primary-emphasis">1</a>
-                    </th>
-                    <td>
-                        <a href="" class="text-primary-emphasis">Ui is not working</a>
-                    </td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-            </tbody>
-        </table>
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Priority</th>
+                        <th>Assigned to</th>
+                        <th>Reported on</th>
+                        <th>Reported by</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bug</td>
+                        <td><a href="#">1</a></td>
+                        <td><a href="#">Ui is not working</a></td>
+                        <td>In progress</td>
+                        <td>High</td>
+                        <td>Punit</td>
+                        <td>23-01-24</td>
+                        <td>Raghu</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
     </div>
 </div>

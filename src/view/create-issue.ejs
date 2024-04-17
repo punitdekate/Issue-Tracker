@@ -1,0 +1,54 @@
+<div class="create-new-project">
+    <form action="/project/issue" method="POST">
+        <div class="issue-heading">
+            <p>Create New Issue</p>
+        </div>
+        <div class="w-47">
+            <label for="project">Project</label>
+            <select name="project" id="project">
+            <option value=""></option>
+          </select>
+
+            <label for="issueType">Type</label>
+            <select name="issueType" id="issueType">
+            <option value=""></option>
+          </select>
+
+        </div>
+        <hr />
+        <div class="margin-tp">
+            <label for="summary">Summary</label>
+            <input type="text" id="summary" name="summary" required />
+        </div>
+
+        <div class="w-30-align">
+            <div>
+                <label for="severity">Severity</label>
+                <select name="severity" id="severity">
+            <option value=""></option>
+          </select>
+            </div>
+            <div><label for="prority">Priority</label>
+                <select name="priority" id="priority">
+              <option value=""></option>
+            </select></div>
+
+
+        </div>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description"></textarea>
+
+        <div class="w-47">
+            <label for="status">Status</label>
+            <select name="status" id="status">
+            <option value=""></option>
+          </select>
+        </div>
+        <div>
+            <label for="attachment">Attachments</label>
+            <input type="file" id="attachment" name="attachment" multiple />
+        </div>
+        <button type="submit">Create</button>
+    </form>
+</div>

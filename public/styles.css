@@ -3,8 +3,6 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    min-width: 1000px;
-    min-height: 1000px;
 }
 
 .login-container {
@@ -135,21 +133,329 @@ body {
 
 .main-page {
     display: flex;
-    width: 100vw;
-    height: 90vh;
+    flex-direction: column;
+    height: 100vh;
 }
 
-.projects {
-    width: 30vw;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: smaller;
-    box-shadow: 3px 0 2px -2px rgb(176, 176, 179);
-    padding: 1rem;
+.main-page-left {
+    padding: 10px;
 }
 
-.project-details {
-    width: 70vw;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: smaller;
-    padding: 1rem;
+.main-page-right {
+    padding: 20px;
 }
+
+.main-page-left {
+    background-color: #f0f0f0;
+    width: 100%;
+}
+
+.main-page-right {
+    background-color: #fff;
+    flex-grow: 1;
+}
+
+.main-page nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.main-page nav ul li {
+    margin-right: 20px;
+}
+
+.main-page nav select,
+nav input[type="search"] {
+    padding: 1px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.main-page nav button[type="submit"] {
+    padding: 2px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.main-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.main-page th,
+td {
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    text-align: left;
+}
+
+.main-page th {
+    background-color: #f2f2f2;
+}
+
+.main-page tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.main-page tr:hover {
+    background-color: #f5f5f5;
+}
+
+.main-page a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+
+/* Responsive styles */
+
+@media only screen and (min-width: 768px) {
+    .main-page {
+        flex-direction: row;
+    }
+    .main-page-left {
+        width: 30%;
+    }
+}
+
+
+/* Create new project css */
+
+.create-new-project form {
+    width: 70%;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-new-project label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: small;
+    width: 100%;
+}
+
+.w-30-align {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.w-30-align div {
+    width: 47%;
+}
+
+.create-new-project form input[type="date"] {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.create-new-project select {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.create-new-project input[type="text"] {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.create-new-project textarea {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 5rem;
+}
+
+.create-new-project input[type="file"] {
+    margin-bottom: 30px;
+    padding: 12px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.create-new-project button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.create-new-project .button {
+    width: 20%;
+    display: flex;
+    margin-right: auto;
+}
+
+.create-new-project button:hover {
+    background-color: #45a049;
+}
+
+.issue-heading {
+    display: flex;
+    height: 10%;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    color: black;
+    border-radius: 10px;
+}
+
+.issue-heading p {
+    margin-top: 4px;
+}
+
+.w-47 {
+    width: 40%
+}
+
+
+/* 
+#description {
+    height: 6rem;
+} */
+
+.margin-tp {
+    margin-top: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    .create-new-project form {
+        width: 95%;
+    }
+}
+
+
+/* Issue css */
+
+
+/* 
+.create-issue form {
+    width: 60%;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-issue label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.create-issue .w30,
+input[type="date"],
+select {
+    width: 40%;
+    padding: 12px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.create-issue input[type="text"],
+button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.create-issue input[type="file"] {
+    margin-bottom: 30px;
+    padding: 12px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.create-issue button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.create-issue button:hover {
+    background-color: #45a049;
+}
+
+.issue-heading {
+    display: flex;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    background-color: #e6edf1;
+    color: black;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+}
+
+#description {
+    height: 6rem;
+}
+
+.margin-tp {
+    margin-top: 15px;
+} */

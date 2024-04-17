@@ -2,9 +2,10 @@ import express from 'express';
 import UserController from '../../controllers/user/user.controller.js';
 import { validateUser, validateUserLogin, emailValidator, passwordValidator, otpValidator } from '../../../middlewares/validator.middleware.js';
 import { auth } from '../../../middlewares/auth.js';
+import ProjectController from '../../controllers/project/project.controller.js';
 
 const userRouter = express.Router();
-
+const projectController = new ProjectController();
 const userController = new UserController();
 userRouter.get('/', (req, res, next) => {
     userController.showRegister(req, res, next);
@@ -20,6 +21,10 @@ userRouter.get('/login', (req, res, next) => {
 
 userRouter.post('/login', validateUserLogin, (req, res, next) => {
     userController.loginUser(req, res, next);
+});
+
+userRouter.get('/', (req, res, next) => {
+    userController.showLogin(req, res, next);
 });
 
 
@@ -43,6 +48,9 @@ userRouter.get('/forget-password', (req, res, next) => {
     userController.showForgetPassword(req, res, next);
 });
 
+userRouter.get('/main-page/issue', auth, (req, res, next) => {
+    projectController.showIssue(req, res, next);
+})
 
 
 

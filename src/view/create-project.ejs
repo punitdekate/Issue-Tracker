@@ -1,0 +1,42 @@
+<div class="create-new-project">
+    <form action="/project/new" method="POST">
+
+        <div class="issue-heading">
+            <p>Create New Project</p>
+        </div>
+        <% if(error){ %>
+            <ul>
+                <li class="error-message">
+                    <%= error.msg %>
+                </li>
+            </ul>
+            <% } %>
+                <div class="w-30">
+                    <div class="">
+                        <label for="name">Project Name<span class="value-required">*</span></label>
+                        <input type="text" id="name" name="name" required />
+
+                        <label for="description">Description<span class="value-required">*</span></label>
+                        <textarea id="description" name="description" required></textarea>
+                    </div>
+                </div>
+                <div class="w-30-align">
+                    <div class="">
+                        <label for="type">Project Type<span class="value-required">*</span></label>
+                        <select name="type" id="type" placeholder="Select-Project-type">
+              <option value="Web Development">Web Development</option>
+              <option value="Android Development">Android Development</option>
+            </select>
+                    </div>
+
+                    <div class="">
+                        <label for="duration">Duration</label>
+                        <input type="date" id="duration" name="duration" required />
+                    </div>
+                </div>
+
+                <div class="button"><button type="submit">Submit</button></div>
+
+
+    </form>
+</div>

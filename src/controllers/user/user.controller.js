@@ -1,10 +1,12 @@
 import UserRepository from "../../model/user/user.repository.js";
 import { sendPasswordForgetEmail } from "../../../utils/mail.handler.js";
 import UserModel from "../../model/user/user.schema.js";
+import ProjectRepository from "../../model/project/project.repository.js";
 
 export default class UserController {
     constructor() {
         this.userRepository = new UserRepository();
+        this.projectRepository = new ProjectRepository();
     }
     showRegister(req, res, next) {
         return res.render("user-register", { "error": null });
@@ -18,7 +20,7 @@ export default class UserController {
                 return res.render('user-register', { "error": { msg: "email already registerd" } })
             } else {
                 await this.userRepository.createUser(req.body);
-                return res.render("main-page");
+                return res.render("user-login", { error: null });
             }
         } catch (error) {
             console.log(error);
@@ -48,7 +50,8 @@ export default class UserController {
                     })
                     req.session.userId = user._id;
                     req.session.userEmail = email;
-                    return res.render('main-page', { "userEmail": email });
+                    const userProjects = await this.projectRepository.getUserCreatedProject({ createdBy: user._id });
+                    return res.render('main-page', { "userEmail": email, projects: userProjects });
                 }
             }
         } catch (error) {

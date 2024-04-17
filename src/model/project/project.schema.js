@@ -8,10 +8,11 @@ const projectSchema = new mongoose.Schema({
     },
     description: {
         type: String,
+        required: [true, "Description is required"]
     },
     type: {
         type: String,
-        enum: ["software", "hardware"],
+        enum: ["Web Development", "Android Development"],
         required: [true, "Type is required"]
     },
     createdBy: {
@@ -33,6 +34,7 @@ const projectSchema = new mongoose.Schema({
     },
     duration: {
         type: Date,
+        default: Date.now + 1 * 12 * 365 * 24 * 60 * 60 * 1000
     }
 })
 

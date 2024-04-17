@@ -5,6 +5,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import { userRouter } from "./src/routes/user/user.routes.js";
 import dotenv from 'dotenv';
+import projectRouter from "./src/routes/project/project.routes.js";
 import cors from 'cors';
 
 const configEnvPath = path.resolve('config', '.env');
@@ -31,6 +32,10 @@ server.use(express.urlencoded({ 'extended': false }));
 
 //User Router
 
+server.use("/project", projectRouter);
 server.use('/', userRouter);
+
+
+
 
 export { server };
