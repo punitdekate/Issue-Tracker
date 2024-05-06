@@ -1,0 +1,39 @@
+<div class="registration">
+    <div class="registration-heading">
+        <h3>Assign Feedback<a href="/main_page" class="x-pos"><i class="fa-solid fa-xmark"></i></a></h3>
+    </div>
+    <div class="registration-form">
+        <% if(error){ %>
+            <ul>
+                <li class="error-message">
+                    <%= error.msg %>
+                </li>
+            </ul>
+            <% } %>
+                <form id="assign_review">
+                    <div class="registration-left">
+                        <label for="employeeId">From Employee<span class="value-required">*</span></label>
+                        <select class="" aria-label="Default select example" name="fromEmployeeId" id="fromEmployee">
+                            <% employees.forEach(employee =>{%>
+                            <option value="<%=employee._id%>" ><%=employee.name %></option>
+                                <%}) %>
+                          </select>
+                    </div>
+                    <hr>
+                    <div class="registration-right">
+                        <label for="employeeId">To Employee<span class="value-required">*</span></label>
+                        <select class="" aria-label="Default select example" name="toEmployeeId" id="toEmployee">
+                            <% employees.forEach(employee =>{%>
+                            <option value="<%=employee._id%>" ><%=employee.name %></option>
+                                <%}) %>
+                          </select>
+
+                        <button type="submit" class="text-center" id="assign-feedback">Submit</button>
+                    </div>
+
+
+
+                </form>
+    </div>
+
+</div>

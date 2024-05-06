@@ -1,0 +1,38 @@
+<div class="employee-table">
+    <div class="employee-top">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th><a href="/main_page"><i class="fa-solid fa-backward"></i></a></th>
+                </tr>
+            </thead>
+            <tbody id="employee-data">
+                <% pendingReviews.forEach(review =>{%>
+                    <tr>
+                        <td>
+                            <%=review.toEmployeeId.customId %>
+                        </td>
+                        <td>
+                            <%=review.toEmployeeId.name %>
+                        </td>
+                        <td>
+                            <%= review.status %>
+                        </td>
+
+                        <td>
+                            <a href="/main_page/pending_reviews/add/?fromEmployeeId=<%=review.fromEmployeeId._id %>&toEmployeeId=<%=review.toEmployeeId._id %>&fromEmployeeName=<%=review.fromEmployeeId.name %>&toEmployeeName=<%=review.toEmployeeId.name %>"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </td>
+                    </tr>
+                    <%}) %>
+            </tbody>
+        </table>
+    </div>
+    <!-- <div class="employee-bottom">
+        <a href="#" id="previous">Previous</a>
+        <a href="#" id="pageNumber" currentPage="1">1</a>
+        <a href="#" id="next">Next</a>
+    </div> -->
+</div>

@@ -1,0 +1,29 @@
+<div class="login-container">
+    <div class="heading">
+        <h2 class="text-center">Employee Login</h2>
+    </div>
+    <div class="login-form">
+        <% if(error){ %>
+            <ul>
+                <li class="error-message">
+                    <%= error.msg %>
+                </li>
+            </ul>
+            <% } %>
+                <form action="/employee_login" method="POST">
+                    <label for="email">Email<span class="value-required">*</span></label>
+                    <input type="email" id="email" name="email" />
+
+                    <label for="password">Password<span class="value-required">*</span></label>
+                    <input type="password" id="password" name="password" />
+
+                    <button type="submit" class="text-center">Submit</button>
+                    <!-- <a href="/forget-password" class="forget-password">Forget Password</a> -->
+                </form>
+                <p>
+                    Login as admin?
+                    <a href="/admin_login">Login</a>
+                    <a href="/employee_register" class="register">Register Employee</a>
+                </p>
+    </div>
+</div>

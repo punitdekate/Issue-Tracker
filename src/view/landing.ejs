@@ -1,0 +1,44 @@
+<div class="employee-view">
+    <div class="left-section">
+        <h3><i class="fa-solid fa-share-from-square rotation"></i>Feedback Recieved</h3>
+        <% feedbackRecieved.forEach(feedback=>{%>
+            <div class="feedback-recieved">
+                <p>
+                    from :
+                    <%= feedback.reviewerId.name%>
+                </p>
+                <p>
+                    feedback :
+                    <%= feedback.feedback%>
+                </p>
+                <p>
+                    rating :
+                    <%= feedback.rating%>/5
+                </p>
+                <hr>
+            </div>
+            <%}) %>
+
+    </div>
+    <hr>
+    <div class="right-section">
+        <h3><i class="fa-solid fa-share-from-square"></i>Feedback Send</h3>
+        <% feedbackSend.forEach(feedback=>{%>
+            <div class="feedback-recieved">
+                <p>
+                    To :
+                    <%= feedback.employeeId.name%>
+                </p>
+                <p>
+                    feedback :
+                    <%= feedback.feedback%>
+                </p>
+                <p>
+                    rating :
+                    <%= feedback.rating%>/5
+                </p>
+                <hr>
+            </div>
+            <%}) %>
+    </div>
+</div>

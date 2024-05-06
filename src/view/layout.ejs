@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERS</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://kit.fontawesome.com/1255aa9144.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="erp-navbar">
+        <div class="logo">
+            <div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj484ajTslDKyxCUSq3N0dlUddztGqiyMUdyC6upW4rw&s">
+            </div>
+            <div>
+                <a href="/main_page">Employee Review Sytem</a>
+            </div>
+
+        </div>
+        <div class="erp-links">
+            <ul>
+                <% if(user){ %>
+                    <li>Hello'
+                        <%= user.userName %>
+                    </li>
+                    <li><a href="/main_page/pending_reviews">Pending Reviews</a></li>
+
+
+
+                    <% if(user.userRole == "Employee"){ %>
+
+                        <% }else{ %>
+                            <li><a href="/feedback/add">Do Feedback</a></li>
+                            <li><a href="/main_page/assign_review">Assign Feedback</a></li>
+                            <li><a href="/main_page/view_employee">Employees</a></li>
+                            <li><a href="/main_page/view_performance">Performances</a></li>
+                            <% } %>
+                                <li><a href="/logout">Sign Out</a></li>
+                                <% }else{ %>
+                                    <li><a href="/employee_login">Sign In</a></li>
+                                    <% } %>
+                                        <!-- <li><a>Add</a></li>
+                <li><a>Remove</a></li> -->
+
+            </ul>
+        </div>
+    </nav>
+    <div id="popup-container">
+        <p id="pop-up-msg"></p>
+    </div>
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup">
+            <p id="popup-msg">Are you sure you want to delete?</p>
+            <div class="button-container">
+                <button id="btn-yes">Yes</button>
+                <button id="btn-no">No</button>
+            </div>
+        </div>
+    </div>
+    <%- body %>
+        <script src="/main.js"></script>
+</body>
+
+</html>

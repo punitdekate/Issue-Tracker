@@ -1,0 +1,40 @@
+<div class="registration">
+    <div class="registration-heading">
+        <h3>Employee Registration</h3>
+    </div>
+    <div class="registration-form">
+        <% if(error){ %>
+            <ul>
+                <li class="error-message">
+                    <%= error.msg %>
+                </li>
+            </ul>
+            <% } %>
+                <form action="/employee_register" method="POST">
+                    <div class="registration-left">
+                        <label for="name">Name<span class="value-required">*</span></label>
+                        <input type="text" id="name" name="name" />
+
+                        <label for="email">Email<span class="value-required">*</span></label>
+                        <input type="email" id="email" name="email" />
+
+                        <label for="password">Password<span class="value-required">*</span></label>
+                        <input type="password" id="password" name="password" />
+                    </div>
+                    <hr>
+                    <div class="registration-right">
+                        <label for="jobTitle">Job Title<span class="value-required">*</span></label>
+                        <input type="text" id="jobTitle" name="jobTitle" />
+                        <label for="department">Department<span class="value-required">*</span></label>
+                        <input type="text" id="department" name="department" />
+                        <label for="location">Location<span class="value-required">*</span></label>
+                        <input type="text" id="location" name="location" />
+                        <label for="phone">Phone<span class="value-required">*</span></label>
+                        <input type="text" id="phone" name="phone" />
+                        <button type="submit" class="text-center" id="phase-submit">Submit</button>
+                    </div>
+                </form>
+    </div>
+    <p>Already have an account? <a href="/employee_login">Login</a></p>
+
+</div>

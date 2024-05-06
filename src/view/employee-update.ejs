@@ -1,0 +1,40 @@
+<div class="registration">
+    <div class="registration-heading">
+        <h3>Employee Update<a href="/main_page/view_employee" class="x-pos"><i class="fa-solid fa-xmark"></i></a></h3>
+    </div>
+    <div class="registration-form">
+        <% if(error){ %>
+            <ul>
+                <li class="error-message">
+                    <%= error.msg %>
+                </li>
+            </ul>
+            <% } %>
+                <form action="/main_page/view_employee/update/<%= employee.customId %>" method="POST">
+                    <div class="registration-left">
+                        <label for="customId">Employee Id<span class="value-required">*</span></label>
+                        <input type="text" id="customId" name="customId" value="<%= employee.customId %>" disabled/>
+
+                        <label for="name">Name<span class="value-required">*</span></label>
+                        <input type="text" id="name" name="name" value="<%= employee.name %>" />
+
+                        <label for="email">Email<span class="value-required">*</span></label>
+                        <input type="email" id="email" name="email" value="<%= employee.email %>" />
+
+                    </div>
+                    <hr>
+                    <div class="registration-right">
+                        <label for="jobTitle">Job Title<span class="value-required">*</span></label>
+                        <input type="text" id="jobTitle" name="jobTitle" value="<%= employee.jobTitle %>" />
+                        <label for="department">Department<span class="value-required">*</span></label>
+                        <input type="text" id="department" name="department" value="<%= employee.department %>" />
+                        <label for="location">Location<span class="value-required">*</span></label>
+                        <input type="text" id="location" name="location" value="<%= employee.location %>" />
+                        <label for="phone">Phone<span class="value-required">*</span></label>
+                        <input type="text" id="phone" name="phone" value="<%= employee.phone %>" />
+                        <button type="submit" class="text-center" id="employee-update-submit">Submit</button>
+                    </div>
+                </form>
+    </div>
+
+</div>

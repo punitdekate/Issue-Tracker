@@ -1,0 +1,53 @@
+<div class="employee-table">
+    <div class="employee-top">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Reviewer Id</th>
+                    <th>Rating</th>
+                    <th>Feedback</th>
+                    <th></th>
+                    <th></th>
+                    <th><a href="/main_page"><i class="fa-solid fa-backward"></i></a></th>
+                </tr>
+            </thead>
+            <tbody id="employee-data">
+                <% performances.forEach(performance =>{%>
+                    <tr>
+                        <td>
+                            <%=performance.employeeId.customId %>
+                        </td>
+                        <td>
+                            <%=performance.employeeId.name %>
+                        </td>
+                        <td>
+                            <%= performance.reviewerId.customId%>
+                        </td>
+                        <td>
+                            <%= performance.rating%>
+                        </td>
+                        <td>
+                            <%= performance.feedback%>
+                        </td>
+
+                        <td> <button onclick="deletePerformance( '<%=performance._id %>')"><i class="fa-solid fa-trash"></i></button> </td>
+                        <td> <a href="/main_page/view_performance/update/<%=performance._id %>"><i class="fa-solid fa-pen-to-square"></i></a> </td>
+                        <td>
+                            <a href="/main_page/view_performance/<%=performance._id %>" i class="fa-solid fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <%}) %>
+
+
+            </tbody>
+        </table>
+    </div>
+    <!-- <div class="employee-bottom">
+        <a href="#" id="previous">Previous</a>
+        <a href="#" id="pageNumber" currentPage="1">1</a>
+        <a href="#" id="next">Next</a>
+    </div> -->
+</div>

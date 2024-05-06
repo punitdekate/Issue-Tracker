@@ -1,0 +1,68 @@
+<div class="employee-table">
+    <div class="employee-top">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Job Title</th>
+                    <th>Department</th>
+                    <th>Location</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th><a href="/main_page"><i class="fa-solid fa-backward"></i></a></th>
+                </tr>
+            </thead>
+            <tbody id="employee-data">
+                <% employees.forEach(employee =>{%>
+                    <tr>
+                        <td>
+                            <%=employee.customId %>
+                        </td>
+                        <td>
+                            <%=employee.name %>
+                        </td>
+                        <td>
+                            <%=employee.phone %>
+                        </td>
+                        <td>
+                            <%=employee.role %>
+                        </td>
+                        <td>
+                            <%=employee.jobTitle %>
+                        </td>
+                        <td>
+                            <%=employee.department %>
+                        </td>
+                        <td>
+                            <%=employee.location %>
+                        </td>
+                        <td> <button onclick="deleteEmployee( '<%=employee._id %>','<%=employee.role %>')"><i class="fa-solid fa-trash"></i></button> </td>
+                        <td> <a href="/main_page/view_employee/update/<%=employee.customId %>"><i class="fa-solid fa-pen-to-square"></i></a> </td>
+                        <td>
+                            <a href="/main_page/view_employee/<%=employee.customId %>" i class="fa-solid fa-eye"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <% if(employee.role == "Admin") {%>
+                                <button onclick="updateAdmin('<%=employee.customId %>','<%=employee.role %>')" style="color: orangered;"><i class="fa-solid fa-user-secret"></i></button>
+                                <% }else{ %>
+                                    <button onclick="updateAdmin('<%=employee.customId %>','<%=employee.role %>')"><i class="fa-solid fa-user-tie"></i></button>
+                                    <% } %>
+                        </td>
+                    </tr>
+                    <%}) %>
+
+
+            </tbody>
+        </table>
+    </div>
+    <!-- <div class="employee-bottom">
+        <a href="#" id="previous">Previous</a>
+        <a href="#" id="pageNumber" currentPage="1">1</a>
+        <a href="#" id="next">Next</a>
+    </div> -->
+</div>
