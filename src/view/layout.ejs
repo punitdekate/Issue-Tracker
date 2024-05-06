@@ -6,66 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Issue Tracker</title>
     <link rel="icon" type="image/x-icon" href="https://cdn.iconscout.com/icon/premium/png-256-thumb/website-bug-tracking-1819337-1544052.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/1255aa9144.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-2">
-        <div class="container-fluid">
-            <% if(locals.userEmail) {%>
-                <a class="navbar-brand" href="">
-                    <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/website-bug-tracking-1819337-1544052.png" alt="Bootstrap" width="30" height="24">
-                </a>
-                <a class="navbar-brand" href="">Issue Tracker</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/project/new">Create Project</a>
+    <nav class="erp-navbar">
+        <div class="logo">
+            <div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdjQ7MI73eSexusnwXrVIzsSQlXJGnGyamAun5cGN8Mg&s">
+            </div>
+            <div>
+                <a href="/issue-tracker">Issue Tracker</a>
+            </div>
+
+        </div>
+        <div class="erp-links">
+            <ul>
+                <% if(user){ %>
+                    <li>Hello'
+                        <%= user.role%>
+                    </li>
+
+                    <% if(user.role == "Admin" && !projectId){ %>
+                        <li>
+                            <a href="/issue-tracker/project/create" class="button-css">New Project</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/main-page/issue">Create Issue</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <% } %>
+
+                            <% if(user.role == "Admin" && projectId){ %>
+
+                                <li><a href="/issue-tracker/<%= projectId%>/assignMember">Assign Member</a></li>
+                                <li><a href="/issue-tracker/issue/<%= projectId%>">Create Issue</a></li>
+
                                 <li>
-                                    <hr class="dropdown-divider">
+                                    <form action="/issue-tracker/<%=projectId %>/search" id="search" method="post">
+                                        <input type="search" placeholder="search" name="searchQuery"></input>
+                                        <button type="submit">Search</button>
+                                    </form>
                                 </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-                <% }else{ %>
-                    <a class="navbar-brand" href="#">
-                        <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/website-bug-tracking-1819337-1544052.png" alt="Bootstrap" width="30" height="24">
-                    </a>
-                    <a class="navbar-brand" href="#">Issue Tracker</a>
-                    <% } %>
+
+                                <% }else if(user.role == "User" && projectId){ %>
+                                    <li><a href="/issue-tracker/issue/<%= projectId%>">Create Issue</a></li>
+
+                                    <li>
+                                        <form action="/issue-tracker/<%=projectId %>/search" id="search" method="post">
+                                            <input type="search" placeholder="search" name="searchQuery"></input>
+                                            <button type="submit">Search</button>
+                                        </form>
+                                    </li>
+
+                                    <% } %>
+                                        <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                        <% } %>
+
+            </ul>
 
         </div>
     </nav>
+    <div id="popup-container">
+        <p id="pop-up-msg"></p>
+    </div>
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup">
+            <p id="popup-msg">Are you sure you want to delete?</p>
+            <div class="button-container">
+                <button id="btn-yes">Yes</button>
+                <button id="btn-no">No</button>
+            </div>
+        </div>
+    </div>
     <main>
-        <span class="loader" id="loader"></span>
         <%- body %>
     </main>
-    <script src="./main.js"></script>
+    <script src="/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 

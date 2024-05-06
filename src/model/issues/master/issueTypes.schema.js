@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const issueType = new mongoose.Schema({
     type: {
-        type: String
+        type: String,
+        unique: [true, "Issue type should be unique"]
     }
 })
 

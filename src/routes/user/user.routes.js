@@ -7,7 +7,12 @@ import ProjectController from '../../controllers/project/project.controller.js';
 const userRouter = express.Router();
 const projectController = new ProjectController();
 const userController = new UserController();
+
 userRouter.get('/', (req, res, next) => {
+    userController.showLogin(req, res, next);
+});
+
+userRouter.get('/register', (req, res, next) => {
     userController.showRegister(req, res, next);
 });
 
@@ -23,12 +28,9 @@ userRouter.post('/login', validateUserLogin, (req, res, next) => {
     userController.loginUser(req, res, next);
 });
 
-userRouter.get('/', (req, res, next) => {
-    userController.showLogin(req, res, next);
-});
 
 
-userRouter.post('/forget-password/verify-otp', auth, otpValidator, (req, res, next) => {
+userRouter.post('/forget-password/otp', auth, otpValidator, (req, res, next) => {
     userController.verifyResetOtp(req, res, next);
 });
 
@@ -48,9 +50,6 @@ userRouter.get('/forget-password', (req, res, next) => {
     userController.showForgetPassword(req, res, next);
 });
 
-userRouter.get('/main-page/issue', auth, (req, res, next) => {
-    projectController.showIssue(req, res, next);
-})
 
 
 

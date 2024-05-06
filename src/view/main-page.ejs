@@ -1,64 +1,113 @@
 <div class="main-page">
     <div class="main-page-left">
-        <h2>Projects</h2>
+        <h2>Project</h2>
         <hr>
         <div>
             <ul>
-                <% projects.forEach(project=>{%>
+                <%if(project){%>
                     <li>
-                        <a href="/project/<%=project._id %>">
-                            <%= project.name %>
-                        </a>
+                        <%=project.name %>
                     </li>
-                    <%})%>
+                    <%}%>
             </ul>
+        </div>
+        <hr>
+        <div class="issue-filter">
+            <h3>Filters</h3>
+            <form action="/issue-tracker/<%= projectId%>/filter" method="post">
+                <label for="assignee">Assignee</label>
+                <select name="assignee" id="assignee">
+                            <option value="">select</option>
+                            <% users.forEach(user=>{%>
+                                <option value=<%=user._id %>><%= user.name %></option>
+                              <%})%>
+                        </select>
+
+                <label for="type">Type</label>
+                <select name="type" id="type">
+                            <option value="">select</option>
+                                <% types.forEach(type=>{%>
+                                    <option value=<%=type.type %>><%= type.type %></option>
+                                  <%})%>
+                            </select>
+
+                <label for="status">Status</label>
+                <select name="status" id="status">
+                            <option value="">select</option>
+                            <% statuses.forEach(status=>{%>
+                                <option value="<%=status.status %>"><%= status.status %></option>
+                              <%})%>
+                        </select>
+
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                            <option value="">select</option>
+                            <% priorities.forEach(priority=>{%>
+                                <option value=<%=priority.priority %>><%= priority.priority %></option>
+                              <%})%>
+                        </select>
+                <button type="submit" class="button-css" style="margin-left: 5px; margin-top: 3px;">Submit</button>
+
+            </form>
 
         </div>
     </div>
     <div class="main-page-right">
-        <nav>
-            <ul>
-                <li>
-                    <select name='project' id="project" placeholder="Select Project">
-                      <option value="" disabled selected>Select Project</option>
-                      <option value="Project 1">Project 1</option>
-                  </select>
-                </li>
-                <li>
-                    <form>
-                        <input type="search" name="search" placeholder="Search...">
-                        <button type="submit">Search</button>
-                    </form>
-                </li>
-            </ul>
-        </nav>
-        <section>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Id</th>
-                        <th>Title</th>
-                        <th>Status</th>
-                        <th>Priority</th>
-                        <th>Assigned to</th>
-                        <th>Reported on</th>
-                        <th>Reported by</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Bug</td>
-                        <td><a href="#">1</a></td>
-                        <td><a href="#">Ui is not working</a></td>
-                        <td>In progress</td>
-                        <td>High</td>
-                        <td>Punit</td>
-                        <td>23-01-24</td>
-                        <td>Raghu</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <div class="employee-table">
+            <div class="employee-top">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Assigned to</th>
+                            <th>Reported on</th>
+                            <th>Reported by</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="employee-data">
+                        <% issues.forEach(issue=>{%>
+                            <tr>
+                                <td>
+                                    <%=issue.issueType %>
+                                </td>
+                                <td>
+                                    <%=issue.summary %>
+                                </td>
+                                <td>
+                                    <%=issue.status %>
+                                </td>
+                                <td>
+                                    <%=issue.priority %>
+                                </td>
+                                <td>
+                                    <%=issue.assignTo.name %>
+                                </td>
+                                <td>
+                                    <%= new Date(issue.createdDate).toLocaleString() %>
+                                </td>
+                                <td>
+                                    <%=issue.assignBy.name %>
+                                </td>
+                                <td>
+                                    <a href="/issue-tracker/issue/view/<%=projectId%>/<%=issue._id %>" id="create-issue">
+                                        <i class="fa-solid fa-angles-right"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <%})%>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="employee-bottom">
+                <a href="#" id="previous">Previous</a>
+                <a href="#" id="pageNumber" currentPage="1">1</a>
+                <a href="#" id="next">Next</a>
+            </div> -->
+        </div>
     </div>
 </div>

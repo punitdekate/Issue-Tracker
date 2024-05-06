@@ -1,15 +1,12 @@
 import UserRepository from "../../model/user/user.repository.js";
 import { sendPasswordForgetEmail } from "../../../utils/mail.handler.js";
-import UserModel from "../../model/user/user.schema.js";
-import ProjectRepository from "../../model/project/project.repository.js";
 
 export default class UserController {
     constructor() {
         this.userRepository = new UserRepository();
-        this.projectRepository = new ProjectRepository();
     }
     showRegister(req, res, next) {
-        return res.render("user-register", { "error": null });
+        return res.render("user-register", { "error": null, user: null, projectId: null });
     }
 
     async registerUser(req, res, next) {
@@ -17,10 +14,10 @@ export default class UserController {
         try {
             const user = await this.userRepository.findUser({ email: email });
             if (user) {
-                return res.render('user-register', { "error": { msg: "email already registerd" } })
+                return res.render('user-register', { "error": { msg: "email already registerd" }, user: null, projectId: null })
             } else {
                 await this.userRepository.createUser(req.body);
-                return res.render("user-login", { error: null });
+                return res.render("user-login", { error: null, user: null, projectId: null });
             }
         } catch (error) {
             console.log(error);
@@ -28,7 +25,7 @@ export default class UserController {
     }
 
     showLogin(req, res, next) {
-        return res.render('user-login', { "error": null });
+        return res.render('user-login', { "error": null, user: null, projectId: null });
     }
 
     async loginUser(req, res, next) {
@@ -36,22 +33,20 @@ export default class UserController {
             const { email, password } = req.body;
             const user = await this.userRepository.findUser({ email: email });
             if (!user) {
-                return res.render('user-login', { "error": "Invalid credentials" });
+                return res.render('user-login', { "error": { msg: "Invalid credentials" }, user: null, projectId: null });
             } else {
                 let verified = await user.comparePassword(password);
-                if (verified) {
-                    return res.render('user-login', { "error": "Incorrect password" });
+                console.log(verified, password);
+                if (!verified) {
+                    return res.render('user-login', { "error": { msg: "Incorrect password" }, user: null, projectId: null });
                 } else {
-                    res.cookie("userEmail", email, {
+                    const userData = await this.userRepository.findUserWithSelect({ email: email });
+                    res.cookie("user", userData, {
                         maxAge: 1 * 24 * 60 * 60
                     });
-                    res.cookie("userId", user._id, {
-                        maxAge: 1 * 24 * 60 * 60
-                    })
                     req.session.userId = user._id;
                     req.session.userEmail = email;
-                    const userProjects = await this.projectRepository.getUserCreatedProject({ createdBy: user._id });
-                    return res.render('main-page', { "userEmail": email, projects: userProjects });
+                    return res.redirect('/issue-tracker');
                 }
             }
         } catch (error) {
@@ -60,7 +55,7 @@ export default class UserController {
     }
 
     showForgetPassword(req, res, next) {
-        return res.render('user-password-reset', { "error": null })
+        return res.render('user-password-reset', { "error": null, user: null, projectId: null })
     }
 
     async sendOtp(req, res, next) {
@@ -69,7 +64,7 @@ export default class UserController {
             console.log(email);
             const user = await this.userRepository.findUser({ email: email });
             if (!user) {
-                return res.render('user-password-reset', { "error": { msg: "Email not registered" } })
+                return res.render('user-password-reset', { "error": { msg: "Email not registered", user: null, projectId: null } })
             } else {
                 const otp = await user.getResetPasswordOtp();
                 await user.save();
@@ -78,7 +73,7 @@ export default class UserController {
                     maxAge: 1 * 24 * 60 * 60
                 });
                 req.session.userEmail = email;
-                return res.render('user-otp-verify', { "error": null })
+                return res.render('user-otp-verify', { "error": null, user: null, projectId: null })
             }
         } catch (error) {
             console.log(error);
@@ -94,7 +89,7 @@ export default class UserController {
             } else {
                 const user = await this.userRepository.findUser({ email: email });
                 if (!user) {
-                    return res.render('user-password-reset', { "error": { msg: "Email not registered" } })
+                    return res.render('user-password-reset', { "error": { msg: "Email not registered" }, user: null, projectId: null })
                 } else {
                     const otp = await user.getResetPasswordOtp();
                     await user.save();
@@ -103,7 +98,7 @@ export default class UserController {
                         maxAge: 1 * 24 * 60 * 60
                     });
                     req.session.userEmail = email;
-                    return res.render('user-otp-verify', { "error": null })
+                    return res.render('user-otp-verify', { "error": null, user: null, projectId: null })
                 }
             }
         } catch (error) {
@@ -116,9 +111,9 @@ export default class UserController {
             const { otp } = req.body;
             const verified = await this.userRepository.verifyResetOtp(otp);
             if (!verified) {
-                return res.render('user-otp-verify', { "error": { msg: "OTP expired or mismatch" } })
+                return res.render('user-otp-verify', { "error": { msg: "OTP expired or mismatch" }, user: null, projectId: null })
             } else {
-                return res.render('user-new-password', { "error": null });
+                return res.render('user-new-password', { "error": null, user: null, projectId: null });
             }
         } catch (error) {
             console.log(error);
@@ -133,7 +128,7 @@ export default class UserController {
         }
         const { newPassword, confirmPassword } = req.body;
         if (newPassword !== confirmPassword) {
-            return res.render('user-new-password', { "error": { msg: "Password mismatch" } });
+            return res.render('user-new-password', { "error": { msg: "Password mismatch" }, user: null, projectId: null });
         } else {
             const user = await this.userRepository.findUser({ email: email });
             if (!user) {

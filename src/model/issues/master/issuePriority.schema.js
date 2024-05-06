@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const issuePriority = new mongoose.Schema({
     priority: {
-        type: String
+        type: String,
+        unique: [true, "Priority should be unique"]
     }
 })
 

@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import UserProjectRelationModel from '../user/user.project.schema.js';
+import UserProjectIssueRelation from '../user/user.project.issue.Schema.js';
 
 const projectSchema = new mongoose.Schema({
     name: {
@@ -9,6 +11,9 @@ const projectSchema = new mongoose.Schema({
     description: {
         type: String,
         required: [true, "Description is required"]
+    },
+    organization: {
+        type: String
     },
     type: {
         type: String,
@@ -38,5 +43,15 @@ const projectSchema = new mongoose.Schema({
     }
 })
 
+projectSchema.pre("deleteOne", async function(next) {
+    try {
+        projectId = this.getQuery._id;
+        await UserProjectIssueRelation.deleteMany({ projectId: projectId });
+        await UserProjectRelationModel.deleteMany({ projectId: projectId });
+        next()
+    } catch (error) {
+        next(error);
+    }
+})
 const ProjectModel = mongoose.model("Project", projectSchema);
 export default ProjectModel;

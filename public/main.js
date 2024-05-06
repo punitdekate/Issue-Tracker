@@ -1,29 +1,24 @@
-//alert message for the otp sent
+async function assignMember(projectId, userId) {
+    try {
+        console.log(projectId, userId);
+        const response = await fetch(`http://localhost:3000/issue-tracker/${projectId}/assignMember/${userId}`, {
+            method: "POST"
+        })
+        const data = await response.json();
+        console.log(data);
+        displayPopup(data.msg);
 
-const forgetOtp = document.getElementById('forget-password');
-const loader = document.getElementById('loader');
-const userPasswordReset = document.getElementById('user-password-reset');
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-console.log(forgetOtp);
-// forgetOtp.addEventListener('click', (event) => {
-//     event.preventDefault();
-//     loader.style.display = 'block';
-//     const formData = new FormData(userPasswordReset);
-//     const email = formData.get("email");
-//     const postData = { email: email };
-//     console.log(email);
-//     // fetch('http://localhost:4700/forget-password', {
-//     //     method: 'POST',
-//     //     body: JSON.stringify(postData)
-//     // }).then(response => {
-//     //     loader.style.display = 'none';
-//     // }).catch(error => {
-//     //     loader.style.display = 'block';
-//     // })
-// });
-
-// const timer = document.getElementById('timer');
-
-// setInterval(()=>{
-
-// },1000)
+function displayPopup(message, duration = 3000) {
+    const popUp = document.getElementById('popup-container');
+    const popUpMsg = document.getElementById('pop-up-msg');
+    popUpMsg.innerText = message;
+    popUp.style.display = 'block';
+    setTimeout(() => {
+        popUp.style.display = 'none';
+    }, duration);
+}

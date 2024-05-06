@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
 const issueSchema = new mongoose.Schema({
-    projectName: {
+    projectId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Project"
+        ref: "Project",
+        required: [true, "Project is mandatory"]
     },
     issueType: {
         type: String,
@@ -17,9 +18,17 @@ const issueSchema = new mongoose.Schema({
         type: String,
         required: [true, "Summary is required"]
     },
-    assignee: {
+    assignBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: [true, "Assignee is mandatory"]
+    },
+    assignTo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: function() {
+            return this.assignBy;
+        }
     },
     description: {
         type: String
@@ -33,6 +42,9 @@ const issueSchema = new mongoose.Schema({
     attachments: [{
         type: String
     }],
+    environment: {
+        type: String,
+    },
     createdDate: {
         type: Date,
         default: Date.now()

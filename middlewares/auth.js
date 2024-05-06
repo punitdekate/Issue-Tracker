@@ -1,7 +1,7 @@
 export const auth = (req, res, next) => {
-    if (req.session.userId || req.cookies.userEmail) {
+    if (req.session.userId) {
         return next();
     } else {
-        return res.redirect("/");
+        return res.redirect("/login");
     }
 }
