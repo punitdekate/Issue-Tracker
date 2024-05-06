@@ -21,6 +21,7 @@ export default class UserController {
             }
         } catch (error) {
             console.log(error);
+            return res.render('error-404', { user: null, projectId: null });
         }
     }
 
@@ -36,7 +37,6 @@ export default class UserController {
                 return res.render('user-login', { "error": { msg: "Invalid credentials" }, user: null, projectId: null });
             } else {
                 let verified = await user.comparePassword(password);
-                console.log(verified, password);
                 if (!verified) {
                     return res.render('user-login', { "error": { msg: "Incorrect password" }, user: null, projectId: null });
                 } else {
@@ -50,7 +50,8 @@ export default class UserController {
                 }
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            return res.render('error-404', { user: null, projectId: null });
         }
     }
 
@@ -77,6 +78,7 @@ export default class UserController {
             }
         } catch (error) {
             console.log(error);
+            return res.render('error-404', { user: null, projectId: null });
         }
 
     }
@@ -102,7 +104,8 @@ export default class UserController {
                 }
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            return res.render('error-404', { user: null, projectId: null });
         }
     }
 
@@ -117,6 +120,7 @@ export default class UserController {
             }
         } catch (error) {
             console.log(error);
+            return res.render('error-404', { user: null, projectId: null });
         }
     }
 

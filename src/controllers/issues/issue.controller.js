@@ -28,27 +28,40 @@ export default class IssueController {
             return res.redirect(`/issue-tracker/${projectId}`);
         } catch (error) {
             console.log(error);
+            return res.render('error-404', { user: null, projectId: null });
         }
     }
 
     async showUpdateIssue(req, res, next) {
-        const issueId = req.params.issueId;
-        const projectId = req.params.projectId;
-        const issue = await this.issueRepository.getIssue({ _id: issueId });
-        const project = await this.projectRepository.getProject({ _id: projectId });
-        const users = await this.userRepository.getUserSpecificProject(projectId);
-        const types = await this.issueRepository.getIssueTypes();
-        const statuses = await this.issueRepository.getIssueStatus();
-        const priorities = await this.issueRepository.getIssuePriorities();
-        return res.render('update-issue', { error: null, user: req.cookies.user, project: project, users: users, types: types, statuses: statuses, priorities: priorities, projectId: projectId, issue: issue });
+        try {
+            const issueId = req.params.issueId;
+            const projectId = req.params.projectId;
+            const issue = await this.issueRepository.getIssue({ _id: issueId });
+            const project = await this.projectRepository.getProject({ _id: projectId });
+            const users = await this.userRepository.getUserSpecificProject(projectId);
+            const types = await this.issueRepository.getIssueTypes();
+            const statuses = await this.issueRepository.getIssueStatus();
+            const priorities = await this.issueRepository.getIssuePriorities();
+            return res.render('update-issue', { error: null, user: req.cookies.user, project: project, users: users, types: types, statuses: statuses, priorities: priorities, projectId: projectId, issue: issue });
+        } catch (error) {
+            console.log(error);
+            return res.render('error-404', { user: null, projectId: null });
+        }
+
     }
     async updateIssue(req, res, next) {
-        const data = req.body;
-        const issueId = req.params.issueId;
-        const projectId = req.params.projectId;
-        const attachments = req.files;
-        const updatedIssue = await this.issueRepository.updateSpecificIssue(issueId, data, attachments);
-        return res.redirect(`/issue-tracker/${projectId}`);
+        try {
+            const data = req.body;
+            const issueId = req.params.issueId;
+            const projectId = req.params.projectId;
+            const attachments = req.files;
+            const updatedIssue = await this.issueRepository.updateSpecificIssue(issueId, data, attachments);
+            return res.redirect(`/issue-tracker/${projectId}`);
+        } catch (error) {
+            console.log(error);
+            return res.render('error-404', { user: null, projectId: null });
+        }
+
     }
 
 }

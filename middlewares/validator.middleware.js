@@ -16,7 +16,7 @@ export const validateUser = async(req, res, next) => {
 
     if (!validationErrors.isEmpty()) {
         const errors = validationErrors.array();
-        return res.render('user-register', { "error": errors[0], "userEmail": req.cookies.userEmail });
+        return res.render('user-register', { "error": errors[0], user: null, projectId: null });
     }
     next();
 }
@@ -35,7 +35,7 @@ export const validateUserLogin = async(req, res, next) => {
 
     if (!validationErrors.isEmpty()) {
         const errors = validationErrors.array();
-        return res.render('user-login', { "error": errors[0], "userEmail": req.cookies.userEmail });
+        return res.render('user-login', { "error": errors[0], user: null, projectId: null });
     }
     next();
 }
@@ -53,7 +53,7 @@ export const emailValidator = async(req, res, next) => {
 
     if (!validationErrors.isEmpty()) {
         const errors = validationErrors.array();
-        return res.render('user-password-reset', { "error": errors[0], "userEmail": req.cookies.userEmail });
+        return res.render('user-password-reset', { "error": errors[0], user: null, projectId: null });
     }
     next();
 }
@@ -73,7 +73,7 @@ export const passwordValidator = async(req, res, next) => {
 
     if (!validationErrors.isEmpty()) {
         const errors = validationErrors.array();
-        return res.render('user-new-password', { "error": errors[0], "userEmail": req.cookies.userEmail });
+        return res.render('user-new-password', { "error": errors[0], user: null, projectId: null });
     }
     next();
 }
@@ -91,7 +91,7 @@ export const otpValidator = async(req, res, next) => {
 
     if (!validationErrors.isEmpty()) {
         const errors = validationErrors.array();
-        return res.render('user-otp-verify', { "error": errors[0], "userEmail": req.cookies.userEmail });
+        return res.render('user-otp-verify', { "error": errors[0], user: null, projectId: null });
     }
     next();
 }
